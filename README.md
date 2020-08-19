@@ -3,11 +3,21 @@ This project is an adaptation of Sebation Lague's A* Pathfinding code from his [
 
 __DISCLAIMER__: My implementation of this code into my own game locks the characters to the Tilemap grid. Theoretically, this code should still function properly in an environment where the characters can move freely on all axes, maybe with minor adjustments.
 
+
 ## How Does It Work?
 There are 3 classes: Node2D, Grid2D, and Pathfinding2D.
-- Node2D: An non-physical object that acts as a marker for where each tile is within the Grid and stores the cost of that tile and whether it is an obstacle or passable.
+- Node2D: A non-physical object that acts as a marker for where each tile is within the Grid and stores the cost of that tile and whether it is an obstacle or passable.
 - Grid2D: Creates a 2D array of nodes within a certain bound, gridWorldSize, and facilitates Pathfinding2D to iterate through the Grid. Also renders a visual description of the Grid in the `onDrawGizmos()` function.
 - Pathfinding2D: Where the calculation of the appropriate path occurs. Given 2 transforms, seeker and target, and an instance of Grid2D, will find the shortest possible path between them.
+
+The `FindPath()` function, using the copy of the grid that it made in `Start()` creates the Node2D List that contains all of the Nodes forming the path from startPos to targetPos, starting at the Node closest to startPos and ending with the Node at targetPos's location. As long as startPos and targetPos do not occupy the same Node, the list will be at least one Node large. This List is passed to the "path" variable in your gridowner object. You can then call 
+```
+"object_name".GetComponent<Pathfinding2D>()."gridowner_name".GetComponent<Grid2D>().path[0].worldPosition;
+```
+to get the position vector of the first Node in the List. For my game, I simply set the position to the first Node in the List:
+```
+seeker.transform.position = seeker.GetComponent<Pathfinding2D>().GridOwner.GetComponent<Grid2D>().path[0].worldPosition;
+```
 
 ## Setup
 
