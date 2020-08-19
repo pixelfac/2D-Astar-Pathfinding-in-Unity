@@ -19,6 +19,7 @@ to get the position vector of the first Node in the List. For my game, I simply 
 seeker.transform.position = seeker.GetComponent<Pathfinding2D>().GridOwner.GetComponent<Grid2D>().path[0].worldPosition;
 ```
 
+
 ## Setup
 1. Copy these .cs files into your Unity Assets folder or wherever you store your scripts in your project.
 2. Create a new Empty GameObject (I named mine GridOwner) and attach the Grid2D script to it.
@@ -30,11 +31,10 @@ seeker.transform.position = seeker.GetComponent<Pathfinding2D>().GridOwner.GetCo
 7. Drag your "obstaclemap" Tilemap over the Obstaclemap variable in the Grid2D Component to set the reference.
 8. In the Grid2D Component, leave Grid Size X and Grid Size Y as 0. They are set in the `Awake()` function.
 9. In the Pathfinding2D Component, set the Seeker, Target, and GridOwner variables the same way you set Obstaclemap. Seeker should be the same object that contains the Pathfinding2D Component, Target is the Object that Seeker is pathfinding to, and GridOwner is the object the object that contains Grid2D.
+10. Populate the "obstaclemap" Tilemap with tiles that your character should not be able to pass through.
+11. Voila! Your character(s) should now path to their target, going around all tiles in obstaclemap.
 
-
-
-
-### Example
 
 ## Tips
 - To help keep your Tilemap and Grid2D grid aligned, make your "GridOwner" object a child of the Grid object that contains your "obstaclemap" Tilemap and reset it's transform
+- After `FindPath()` has been run once, Scene View should show Cube Gizmos of different colors. White/Grey are passable Nodes, Red are impassable, and Black is the path the seeker will take to reach the target, assuming a path exists.
