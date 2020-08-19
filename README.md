@@ -1,1 +1,1 @@
-# 2D-A-Pathfinding-in-Unity
+# 2D-Astar-Pathfinding-in-Unity
