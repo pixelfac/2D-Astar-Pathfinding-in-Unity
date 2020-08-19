@@ -23,7 +23,7 @@ public class Grid2D : MonoBehaviour
         CreateGrid();
     }
 
-
+    
 
     void CreateGrid()
     {
@@ -101,9 +101,6 @@ public class Grid2D : MonoBehaviour
 
         int x = Mathf.RoundToInt(worldPosition.x - 1 + (gridSizeX / 2));
         int y = Mathf.RoundToInt(worldPosition.y + (gridSizeY / 2));
-
-        //Debug.Log(x + "," + y + "\n" + worldPosition.x + "+" + (gridSizeX / 2) + "\n" + worldPosition.y + "+" + (gridSizeY / 2));
-
         return Grid[x, y];
     }
 
@@ -125,7 +122,7 @@ public class Grid2D : MonoBehaviour
 
                 if (path != null && path.Contains(n))
                     Gizmos.color = Color.black;
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .6f));
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeRadius));
 
             }
         }

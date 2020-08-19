@@ -7,7 +7,7 @@ public class Pathfinding2D : MonoBehaviour
 
     public Transform seeker, target;
     Grid2D grid;
-    Node2D playerNode, targetNode;
+    Node2D seekerNode, targetNode;
     public GameObject GridOwner;
 
 
@@ -20,13 +20,13 @@ public class Pathfinding2D : MonoBehaviour
 
     public void FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        //get player and target position in grid position
-        playerNode = grid.NodeFromWorldPoint(startPos);
+        //get player and target position in grid coords
+        seekerNode = grid.NodeFromWorldPoint(startPos);
         targetNode = grid.NodeFromWorldPoint(targetPos);
 
         List<Node2D> openSet = new List<Node2D>();
         HashSet<Node2D> closedSet = new HashSet<Node2D>();
-        openSet.Add(playerNode);
+        openSet.Add(seekerNode);
         
         //calculates path for pathfinding
         while (openSet.Count > 0)
@@ -49,7 +49,7 @@ public class Pathfinding2D : MonoBehaviour
             //If target found, retrace path
             if (node == targetNode)
             {
-                RetracePath(playerNode, targetNode);
+                RetracePath(seekerNode, targetNode);
                 return;
             }
             
@@ -75,7 +75,7 @@ public class Pathfinding2D : MonoBehaviour
         }
     }
 
-    //reverses calculated path so first node is closest to character
+    //reverses calculated path so first node is closest to seeker
     void RetracePath(Node2D startNode, Node2D endNode)
     {
         List<Node2D> path = new List<Node2D>();
