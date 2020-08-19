@@ -1,7 +1,7 @@
 # 2D-Astar-Pathfinding-in-Unity
 This project is an adaptation of Sebation Lague's A* Pathfinding code from his [youtube series](https://youtu.be/-L-WgKMFuhE) into 2D. Specifically, this project uses Unity [Tilemaps](https://docs.unity3d.com/Manual/class-Tilemap.html) to detect obstacles, rather than using collision boxes as in Lague's version. Since Tilemaps are a very powerful tool in designing settings in 2D games, adding and manipulating the environment that your entities need to path through is very fast and straightforward.
 
-__DISCLAIMER__: My implementation of this code into my own game locks the characters to the Tilemap grid. Theoretically, this code should still function properly in an environment where the characters can move freely on all axes, maybe with minor adjustments. Additionally, I'm not sure whether this code can support multiple entities pathfinding in real time, simultaneously since each instance of Pathfinding2D calls back to the same Grid2D instance. If this poses an issue in your implementation of this code, try making multiple "Grid2D" instances for each instance of Pathfinding2D or do what you want with the `path` variable immediately after calling the `FindPath()` function.
+__DISCLAIMER__: My implementation of this code into my own game locks the characters to the Tilemap grid. Theoretically, this code should still function properly in an environment where the characters can move freely on all axes, maybe with minor adjustments. Additionally, I haven't tested whether this code can support multiple entities pathfinding in real time, simultaneously since each instance of Pathfinding2D calls back to the same Grid2D instance. If this poses an issue in your implementation of this code, try making multiple Grid2D instances for each instance of Pathfinding2D or do what you want with the `path` variable immediately after that object calls the `FindPath()` function, to avoid that object using the path from another objects `FindPath()`.
 
 
 ## How Does It Work?
@@ -20,10 +20,21 @@ seeker.transform.position = seeker.GetComponent<Pathfinding2D>().GridOwner.GetCo
 ```
 
 ## Setup
-1. Copy these .cs files into your Unity Assets folder or wherever you store your scripts in your project
-2. Create a new Empty GameObject (I named mine GridOwner) and attach the Grid2D script to it
-3. Attach the Pathfinding2D script to whichever object(s) will be doing the pathfinding
-4. 
+1. Copy these .cs files into your Unity Assets folder or wherever you store your scripts in your project.
+2. Create a new Empty GameObject (I named mine GridOwner) and attach the Grid2D script to it.
+3. Create a new Tilemap and name it something like "obstaclemap".
+4. Attach the Pathfinding2D script to whichever object(s) will be doing the pathfinding.
+5. In the Grid2D Component, Set Node Radius to half of what your Tilemap scale is. Tilemap Tiles are default 1x1 so Node Radius should be set to 0.5
+6. In the Grid2D Component, change the x and y values of Grid World Size to encapsulate the region that is 'pathfindable'. In Scene view, there should be a WireFrame box reflecting the size of Grid World Size. Use that to correctly block out how much space you want.
+   - Both the x and y should be a multiple of 2\*Node Radius to avoid misalignment with Tilemap.
+7. Drag your "obstaclemap" Tilemap over the Obstaclemap variable in the Grid2D Component to set the reference.
+8. In the Grid2D Component, leave Grid Size X and Grid Size Y as 0. They are set in the `Awake()` function.
+9. In the Pathfinding2D Component, set the Seeker, Target, and GridOwner variables the same way you set Obstaclemap. Seeker should be the same object that contains the Pathfinding2D Component, Target is the Object that Seeker is pathfinding to, and GridOwner is the object the object that contains Grid2D.
+
+
 
 
 ### Example
+
+## Tips
+- To help keep your Tilemap and Grid2D grid aligned, make your "GridOwner" object a child of the Grid object that contains your "obstaclemap" Tilemap and reset it's transform
