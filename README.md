@@ -36,5 +36,6 @@ seeker.transform.position = seeker.GetComponent<Pathfinding2D>().GridOwner.GetCo
 
 
 ## Tips
-- To help keep your Tilemap and Grid2D grid aligned, make your "GridOwner" object a child of the Grid object that contains your "obstaclemap" Tilemap and reset it's transform
+- To help keep your Tilemap and Grid2D grid aligned, make your "GridOwner" object a child of the Grid object that contains your "obstaclemap" Tilemap and reset it's transform.
 - After `FindPath()` has been run once, Scene View should show Cube Gizmos of different colors. White/Grey are passable Nodes, Red are impassable, and Black is the path the seeker will take to reach the target, assuming a path exists.
+- The default setting is to only allow movement in the 4 cardinal directions. If you would like to enable diagonal motion as well, simply uncomment out that portion of text in Grid2D.cs.
