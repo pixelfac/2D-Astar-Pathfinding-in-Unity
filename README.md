@@ -8,7 +8,7 @@ There are 3 classes: Node2D, Grid2D, and Pathfinding2D.
 - Grid2D: Creates a 2D array of nodes within a certain bound, gridWorldSize, and facilitates Pathfinding2D to iterate through the Grid. Also renders a visual description of the Grid in the `onDrawGizmos()` function.
 - Pathfinding2D: Where the calculation of the appropriate path occurs. Given 2 transforms, seeker and target, and an instance of Grid2D, will find the shortest possible path between them.
 
-Grid2D and Pathfinding2D have [ExecuteInEditMode] attribute, so you can see all the changes in editor. Don't be scared if you get a few nullrefs when you import the scipts. Once you hook everything up, they will be gone.
+Grid2D and Pathfinding2D have `[ExecuteInEditMode]` attribute, so you can see all the changes in editor. Don't be scared if you get a few nullrefs when you import the scipts. Once you hook everything up, they will be gone.
 
 ## Functionality:
 - **Feature #1** - Obstacle pathing. Core functionality of Astar pathfinding remains as one would expect - we pass a Vector3 coordinates, and algorithm calculates the shortest path through the nodes, avoiding any obstacles. However, you are now able to click an obstacle itself and Astar will return you a path to the closest walkable node, instead of throwing an error (since the obstacle node isn't technically traversible).
@@ -37,7 +37,7 @@ Grid2D and Pathfinding2D have [ExecuteInEditMode] attribute, so you can see all 
 3. Create a new Tilemap with obstacles on it.
 4. Attach the Pathfinding2D script to whichever object(s) will be doing the pathfinding.
 5. Adjust Grid2D parameters as you see fit.
-6. Reference the obstacle Tilemap e in the Grid2D Component.
+6. Reference the obstacle Tilemap in the Grid2D Component.
 7. Set the seeking Target / Position in the Pathfinding2D Component.
 8. Done!
 
