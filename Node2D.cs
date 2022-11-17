@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Node2D
 {
     public int gCost, hCost;
     public bool obstacle;
+    public bool collision;
     public Vector3 worldPosition;
 
     public int GridX, GridY;
@@ -33,5 +35,10 @@ public class Node2D
     public void SetObstacle(bool isOb)
     {
         obstacle = isOb;
+    }
+
+    public void SetCollision(bool isCol)
+    {
+        collision = isCol;
     }
 }
